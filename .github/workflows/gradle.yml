@@ -26,12 +26,6 @@ jobs:
       run: ./gradlew test jacocoTestReport
     - name: Build with Gradle
       run: ./gradlew build
-    - name: Run sonarqube
-      if: github.event.pull_request.head.repo.fork == false
-      run: ./gradlew sonarqube --stacktrace
-            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   release:
     if: github.event_name == 'release' 
     runs-on: ubuntu-latest
