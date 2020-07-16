@@ -24,6 +24,8 @@ jobs:
       run: chmod +x gradlew
     - name: Execute jacocoTestReport
       run: ./gradlew test jacocoTestReport --warning-mode all
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Build with Gradle 
       run: ./gradlew build --warning-mode all
   release:
