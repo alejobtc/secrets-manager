@@ -23,9 +23,9 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Execute jacocoTestReport
-      run: ./gradlew test jacocoTestReport
-    - name: Build with Gradle
-      run: ./gradlew build
+      run: ./gradlew test jacocoTestReport --warning-mode all
+    - name: Build with Gradle 
+      run: ./gradlew build --warning-mode all
   release:
     if: github.event_name == 'release' 
     runs-on: ubuntu-latest
