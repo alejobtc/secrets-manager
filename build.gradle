@@ -62,15 +62,19 @@ jacocoTestReport {
 }
 
 publishing {
-  repositories {
-    maven {
-      name = "GitHubPackages"
-      url = "https://maven.pkg.github.com/alejobtc/secrets-manager"
-      credentials = {
-        username = "alejobtc"
-        password = System.getenv("GITHUB_TOKEN")
-      }
-    }
-  }
+	repositories {
+		maven {
+			name = "GitHubPackages"
+			url = uri("https://maven.pkg.github.com/alejobtc/secrets-manager")
+			credentials {
+				username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
+				password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
+			}
+		}
+	}
+	publications {
+		gpr(MavenPublication) {
+			from(components.java)
+		}
+	}
 }
-
