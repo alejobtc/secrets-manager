@@ -74,6 +74,9 @@ publishing {
 	}
 	publications {
 		gpr(MavenPublication) {
+			groupId "co.com.bancolombia"
+			artifactId "secretsmanager"
+			version "2.1.0"
 			from(components.java)
 		}
 	}
