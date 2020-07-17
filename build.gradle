@@ -79,7 +79,7 @@ publishing {
 				password = project.findProperty("gpr.user") ?: System.getenv("MAVEN_PASSWORD")
 		      }
     }
-	}
+	
 	publications {
 		gpr(MavenPublication) {
 			groupId "co.com.bancolombia"
