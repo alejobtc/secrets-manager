@@ -44,7 +44,7 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Publish Library
-        run: ./gradlew publish
+        run: ./gradlew publish Psigning.secretKeyRingFile=${{ secrets.SIGNKEY }} -Psigning.password=${{ secrets.SIGNPASS }} -Psigning.keyId=${{ secrets.SIGNKEYID}}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
