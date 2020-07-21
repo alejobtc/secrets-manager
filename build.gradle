@@ -95,8 +95,8 @@ publishing {
             pom.withXml {
                 def pomFile = file("${project.buildDir}/generated-pom.xml")
                 writeTo(pomFile)
-                def pomAscFile = signing.sign(pomFile).signatureFiles[0]
-                artifact(pomAscFile) {
+                //def pomAscFile = signing.sign(pomFile).signatureFiles[0]
+                artifact(pomFile) {
                     classifier = null
                     extension = 'pom.asc'
                 }
