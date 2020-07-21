@@ -34,6 +34,23 @@ dependencies {
 	testImplementation 'junit:junit:4.12'
 }
 
+task sourceJar(type: Jar) {
+    classifier "sources"
+    from sourceSets.main.allJava
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier "javadoc"
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives jar
+    archives sourceJar
+    archives javadocJar
+}
+
+
 
 jar {
     manifest.attributes provider: 'Ingeniería de Software'
