@@ -1,16 +1,12 @@
 buildscript {
     repositories {
-        jcenter()
 	mavenCentral()
     }
-    dependencies {
-        classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
-    }
+
 }
 
 
 plugins {
-	id 'com.bmuschko.nexus'
 	id 'jacoco'
 	id "org.sonarqube" version "2.8"
 	id 'maven-publish'
@@ -68,70 +64,100 @@ jacocoTestReport {
 	}
 }
 
-modifyPom {
-    project {
-        name 'teachUpload'
-        description 'Teaching how to use gradle.'
-        url 'https://bitbucket.org/objdict/objjson'
-        inceptionYear '2018'
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            customizePom(pom)
+            groupId 'com.github.bancolombia'
+            artifactId 'secrets-manager'
+            version '1.0.1'
 
-        scm {
-            url 'https://bitbucket.org/objdict/objjson'
-            connection 'scm:https://bitbucket.org/objdict/objjson.git'
-            developerConnection 'scm:git://bitbucket.org/objdict/objjson.git'
-        }
+            from components.java
 
-        licenses {
-            license {
-                name 'The Apache Software License, Version 2.0'
-                url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                distribution 'repo'
+            // create the sign pom artifact
+            pom.withXml {
+                def pomFile = file("${project.buildDir}/generated-pom.xml")
+                writeTo(pomFile)
+                def pomAscFile = signing.sign(pomFile).signatureFiles[0]
+                artifact(pomAscFile) {
+                    classifier = null
+                    extension = 'pom.asc'
+                }
+            }
+
+            artifact(sourceJar) {
+                classifier = 'sources'
+            }
+            artifact(javadocJar) {
+                classifier = 'javadoc'
+            }
+
+            // create the signed artifacts
+            project.tasks.signArchives.signatureFiles.each {
+                artifact(it) {
+                    def matcher = it.file =~ /-(sources|javadoc)\.jar\.asc$/
+                    if (matcher.find()) {
+                        classifier = matcher.group(1)
+                    } else {
+                        classifier = null
+                    }
+                    extension = 'jar.asc'
+                }
             }
         }
-
-        developers {
-            developer {
-                id 'albertgao'
-                name 'Albert Gao'
-                email 'albert.gao@salect.co.nz'
+    }
+    repositories {
+        maven {
+            url "https://oss.sonatype.org/service/local/staging/deploy/maven2"
+            credentials {
+                username sonatypeUsername
+                password sonatypePassword
             }
         }
     }
 }
 
-extraArchive {
-    sources = true
-    tests = true
-    javadoc = true
-}
+def customizePom(pom) {
+    pom.withXml {
+        def root = asNode()
 
+        // eliminate test-scoped dependencies (no need in maven central POMs)
+        root.dependencies.removeAll { dep ->
+            dep.scope == "test"
+        }
 
-publishing {
-	repositories {
-		maven {
-			name = "GitHubPackages"
-			url = uri("https://maven.pkg.github.com/alejobtc/secrets-manager")
-			credentials {
-				username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
-				password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
-			}
-		}
-		maven {
-		      name = "OSSRH"
-		      url = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
-		      credentials {
-				username = project.findProperty("gpr.user") ?: System.getenv("MAVEN_USERNAME")
-				password = project.findProperty("gpr.user") ?: System.getenv("MAVEN_PASSWORD")
-		      }
-    		}
-	}
-	
-	publications {
-		gpr(MavenPublication) {
-			groupId "com.github.bancolombia"
-			artifactId "secrets-manager"
-			version "2.1.1"
-			from(components.java)
-		}
-	}
+        // add all items necessary for maven central publication
+        root.children().last() + {
+            resolveStrategy = Closure.DELEGATE_FIRST
+
+            description 'Serialize and Deserialize Json-LD into Java entities'
+            name 'Schema.org Java'
+            url 'https://github.com/mautini/schemaorg-java'
+            organization {
+                name 'com.github.mautini'
+                url 'https://github.com/mautini'
+            }
+            issueManagement {
+                system 'GitHub'
+                url 'https://github.com/mautini/schemaorg-java/issues'
+            }
+            licenses {
+                license {
+                    name 'Apache License 2.0'
+                    url 'https://github.com/mautini/schemaorg-java/blob/master/LICENSE'
+                    distribution 'repo'
+                }
+            }
+            scm {
+                url 'https://github.com/mautini/schemaorg-java'
+                connection 'scm:git:git://github.com/mautini/schemaorg-java.git'
+                developerConnection 'scm:git:ssh://git@github.com:mautini/schemaorg-java.git'
+            }
+            developers {
+                developer {
+                    name 'Mautini'
+                }
+            }
+        }
+    }
 }
