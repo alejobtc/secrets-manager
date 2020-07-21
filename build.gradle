@@ -116,9 +116,8 @@ publishing {
         maven {
             url "https://oss.sonatype.org/service/local/staging/deploy/maven2"
             credentials {
-                credentials {
-			username = project.findProperty("gpr.user") ?: System.getenv("MAVEN_USERNAME")
-			password = project.findProperty("gpr.user") ?: System.getenv("MAVEN_PASSWORD")
+		username = project.findProperty("gpr.user") ?: System.getenv("MAVEN_USERNAME")
+		password = project.findProperty("gpr.user") ?: System.getenv("MAVEN_PASSWORD")
 		      
             }
         }
