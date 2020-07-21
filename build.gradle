@@ -126,9 +126,9 @@ publishing {
 }
 
 signing {
-    def signingKeyId  = project.findProperty("gpr.user") ?: System.getenv("signkeyid")
-    def signingKey = project.findProperty("gpr.user") ?: System.getenv("signkey")
-    def signingPassword = project.findProperty("gpr.user") ?: System.getenv("signpass")
+    def signingKeyId  = project.findProperty("gpr.user") ?: System.getenv("SIGNKEYID")
+    def signingKey = project.findProperty("gpr.user") ?: System.getenv("SIGNKEY")
+    def signingPassword = project.findProperty("gpr.user") ?: System.getenv("SIGNPASS")
     useInMemoryPgpKeys(signingKeyId, signingKey, signingPassword)
     sign configurations.archives
 }
