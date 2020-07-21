@@ -11,6 +11,7 @@ plugins {
 	id "org.sonarqube" version "2.8"
 	id 'maven-publish'
 	id 'java-library'
+	id 'signing'
 }
 
 group 'co.com.bancolombia.commons.secretsmanager'
@@ -95,8 +96,8 @@ publishing {
             pom.withXml {
                 def pomFile = file("${project.buildDir}/generated-pom.xml")
                 writeTo(pomFile)
-                //def pomAscFile = signing.sign(pomFile).signatureFiles[0]
-                artifact(pomFile) {
+                def pomAscFile = signing.sign(pomFile).signatureFiles[0]
+                artifact(pomAscFile) {
                     classifier = null
                     extension = 'pom.asc'
                 }
@@ -122,6 +123,10 @@ publishing {
             }
         }
     }
+}
+
+signing {
+    sign configurations.archives
 }
 
 def customizePom(pom) {
@@ -166,5 +171,17 @@ def customizePom(pom) {
                 }
             }
         }
+    }
+}
+
+model {
+    tasks.generatePomFileForMavenJavaPublication {
+        destination = file("$buildDir/generated-pom.xml")
+    }
+    tasks.publishMavenJavaPublicationToMavenLocal {
+        dependsOn project.tasks.signArchives
+    }
+    tasks.publishMavenJavaPublicationToMavenRepository {
+        dependsOn project.tasks.signArchives
     }
 }
