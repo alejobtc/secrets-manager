@@ -8,9 +8,9 @@ buildscript {
     }
 }
 
-apply plugin: 'com.bmuschko.nexus'
 
 plugins {
+	id 'com.bmuschko.nexus'
 	id 'jacoco'
 	id "org.sonarqube" version "2.8"
 	id 'maven-publish'
