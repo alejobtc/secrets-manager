@@ -27,9 +27,7 @@ jobs:
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Set signs
-      run: ./gradlew sign -Psigning.secretKeyRingFile=${{ secrets.SIGNKEY }} -Psigning.password=${{ secrets.SIGNPASS }} -Psigning.keyId=${{ secrets.
-SIGNKEYID
- }}
+      run: ./gradlew sign -Psigning.secretKeyRingFile=${{ secrets.SIGNKEY }} -Psigning.password=${{ secrets.SIGNPASS }} -Psigning.keyId=${{ secrets.SIGNKEYID}}
     - name: Build with Gradle 
       run: ./gradlew build --warning-mode all
   release:
