@@ -27,11 +27,8 @@ jobs:
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Build with Gradle 
-      run: ./gradlew build --warning-mode all
+      run: ./gradlew build --refresh-dependencies --no-daemon --continue --warning-mode all
       env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
           SIGNKEY: ${{ secrets.SIGNKEY }}  
           SIGNPASS: ${{ secrets.SIGNPASS }}  
           SIGNKEYID: ${{ secrets.SIGNKEYID }} 
