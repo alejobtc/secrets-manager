@@ -26,10 +26,8 @@ jobs:
       run: ./gradlew test jacocoTestReport --warning-mode all
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Set signs
-      run: ./gradlew sign -Psigning.secretKeyRingFile=${{ secrets.SIGNKEY }} -Psigning.password=${{ secrets.SIGNPASS }} -Psigning.keyId=${{ secrets.SIGNKEYID}}
     - name: Build with Gradle 
-      run: ./gradlew build --warning-mode all
+      run: ./gradlew build -Psigning.secretKeyRingFile=${{ secrets.SIGNKEY }} -Psigning.password=${{ secrets.SIGNPASS }} -Psigning.keyId=${{ secrets.SIGNKEYID}} --warning-mode all
   release:
     runs-on: ubuntu-latest
     needs: build
