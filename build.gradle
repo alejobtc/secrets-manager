@@ -124,7 +124,7 @@ publishing {
             }
         }
     }
-}
+}*/
 
 
 bintray {
@@ -146,4 +146,3 @@ bintray {
         }
     }
 }
-*/
