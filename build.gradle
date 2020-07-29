@@ -145,7 +145,6 @@ bintray {
     publish = true
     pkg {
         repo = 'Maven'
-        userOrg = 'bancolombia'
         name = 'com.github.bancolombia.secrets-manager'
         licenses = ['Apache-2.0']
         vcsUrl = 'git@github.com:bancolombia/secrets-manager.git'
