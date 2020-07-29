@@ -55,7 +55,7 @@ dependencies {
 	testImplementation 'junit:junit:4.12'
 }
 
-task sourceJar(type: Jar) {
+/*task sourceJar(type: Jar) {
     classifier "sources"
     from sourceSets.main.allJava
 }
@@ -77,7 +77,7 @@ jar {
     manifest.attributes provider: 'Ingeniería de Software'
 	archivesBaseName = 'secretsmanager'
 	version = "$version"
-}
+}*/
 
 sonarqube {
 	properties {
