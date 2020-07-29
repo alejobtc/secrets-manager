@@ -101,7 +101,7 @@ jacocoTestReport {
 		xml.enabled true
 	}
 }
-
+/*
 publishing {
     publications {
         MyPublication(MavenPublication) {
@@ -146,3 +146,4 @@ bintray {
         }
     }
 }
+*/
