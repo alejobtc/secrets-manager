@@ -6,7 +6,7 @@ buildscript {
         repoUrl = project.hasProperty('repository') ? project.getProperty('repository') : 'https://artifactory.apps.bancolombia.com/maven-bancolombia'
         grupo = project.hasProperty('grupo') ? project.getProperty('grupo') : 'co.com.bancolombia'
         artefact = project.hasProperty('artefacto') ? project.getProperty('artefacto') : 'secretsmanager'
-        version = project.hasProperty('version') ? project.getProperty('version') : '1.0.0'
+        version = '1.0.0'
         user = project.hasProperty('usuario') ? project.getProperty('usuario') : ''
         psw = project.hasProperty('clave') ? project.getProperty('clave') : ''
     }
@@ -119,7 +119,7 @@ publishing {
             from components.java
             groupId 'com.github.bancolombia'
             artifactId 'secrets-manager'
-            version "$version"
+            version '1.0.0'
             pom.withXml {
                 def root = asNode()
                 root.appendNode('description', 'Secrets Manager')
@@ -145,13 +145,13 @@ bintray {
     pkg {
         repo = 'Maven'
         name = 'com.github.bancolombia.secrets-manager'
-        licenses = ['Apache-2.0']
+        licenses = ['MIT']
         vcsUrl = 'git@github.com:bancolombia/secrets-manager.git'
         version {
-            name = "$version"
+            name = '1.0.0'
             desc = 'First version'
             released  = new Date()
-            vcsTag = "$version"
+            vcsTag = '1.0.0'
         }
     }
 }
