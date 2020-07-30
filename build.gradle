@@ -6,7 +6,7 @@ buildscript {
         repoUrl = project.hasProperty('repository') ? project.getProperty('repository') : 'https://artifactory.apps.bancolombia.com/maven-bancolombia'
         grupo = project.hasProperty('grupo') ? project.getProperty('grupo') : 'co.com.bancolombia'
         artefact = project.hasProperty('artefacto') ? project.getProperty('artefacto') : 'secretsmanager'
-        version = project.hasProperty('version') ? project.getProperty('version') : '2.2.1'
+        version = project.hasProperty('version') ? project.getProperty('version') : '1.0.0'
         user = project.hasProperty('usuario') ? project.getProperty('usuario') : ''
         psw = project.hasProperty('clave') ? project.getProperty('clave') : ''
     }
@@ -88,7 +88,6 @@ artifacts {
 jar {
     manifest.attributes provider: 'Ingeniería de Software'
 	archivesBaseName = 'secretsmanager'
-	version = "$version"
 }
 
 sonarqube {
@@ -122,7 +121,7 @@ publishing {
             artifactId 'secrets-manager'
             version "$version"
             pom.withXml {
-                def root = dependenciesNode.appendNode('dependency')
+                def root = asNode()
                 root.appendNode('description', 'Secrets Manager')
                 root.appendNode('name', 'secrets-manager')
                 root.appendNode('url', 'https://site_for_lib.tld')
@@ -149,10 +148,10 @@ bintray {
         licenses = ['Apache-2.0']
         vcsUrl = 'git@github.com:bancolombia/secrets-manager.git'
         version {
-            name = project.property('version')
+            name = "$version"
             desc = 'First version'
             released  = new Date()
-            vcsTag = project.property('version')
+            vcsTag = "$version"
         }
     }
 }
