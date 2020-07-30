@@ -4,8 +4,8 @@ buildscript {
     }
     ext {
         repoUrl = project.hasProperty('repository') ? project.getProperty('repository') : 'https://artifactory.apps.bancolombia.com/maven-bancolombia'
-        grupo = project.hasProperty('grupo') ? project.getProperty('grupo') : 'co.com.bancolombia'
-        artefact = project.hasProperty('artefacto') ? project.getProperty('artefacto') : 'secretsmanager'
+        grupo = project.hasProperty('grupo') ? project.getProperty('grupo') : 'com.github.bancolombia'
+        artefact = project.hasProperty('artefacto') ? project.getProperty('artefacto') : 'secrets-manager'
         version = '1.0.0'
         user = project.hasProperty('usuario') ? project.getProperty('usuario') : ''
         psw = project.hasProperty('clave') ? project.getProperty('clave') : ''
@@ -47,7 +47,7 @@ def pomConfig = {
     }
 }
 
-group 'co.com.bancolombia.commons.secretsmanager'
+group 'com.github.bancolombia'
 
 repositories {
 	mavenCentral()
@@ -127,11 +127,6 @@ publishing {
                 root.appendNode('url', 'https://site_for_lib.tld')
                 root.children().last() + pomConfig
             }
-
-
-
-
-
         }
     }
 }
