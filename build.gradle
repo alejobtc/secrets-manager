@@ -6,7 +6,7 @@ buildscript {
         repoUrl = project.hasProperty('repository') ? project.getProperty('repository') : 'https://artifactory.apps.bancolombia.com/maven-bancolombia'
         grupo = project.hasProperty('grupo') ? project.getProperty('grupo') : 'co.com.bancolombia'
         artefact = project.hasProperty('artefacto') ? project.getProperty('artefacto') : 'secretsmanager'
-        version = project.hasProperty('version') ? project.getProperty('version') : '1.0.0'
+        version = '1.0.0'
         user = project.hasProperty('usuario') ? project.getProperty('usuario') : ''
         psw = project.hasProperty('clave') ? project.getProperty('clave') : ''
     }
