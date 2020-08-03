@@ -3,12 +3,7 @@ buildscript {
 	    mavenCentral()
     }
     ext {
-        repoUrl = project.hasProperty('repository') ? project.getProperty('repository') : 'https://artifactory.apps.bancolombia.com/maven-bancolombia'
-        grupo = project.hasProperty('grupo') ? project.getProperty('grupo') : 'com.github.bancolombia'
-        artefact = project.hasProperty('artefacto') ? project.getProperty('artefacto') : 'secrets-manager'
         version = '1.0.0'
-        user = project.hasProperty('usuario') ? project.getProperty('usuario') : ''
-        psw = project.hasProperty('clave') ? project.getProperty('clave') : ''
     }
 
 }
