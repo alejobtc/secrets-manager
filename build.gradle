@@ -83,7 +83,7 @@ artifacts {
 
 jar {
     manifest.attributes provider: 'Ingeniería de Software'
-	archivesBaseName = 'secretsmanager'
+	archivesBaseName = 'secrets-manager'
 }
 
 sonarqube {
