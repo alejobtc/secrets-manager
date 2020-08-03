@@ -21,7 +21,7 @@ plugins {
 test.onlyIf { false }
 
 
-def pomConfig = {
+/*def pomConfig = {
     licenses {
         license {
             name "The Apache Software License, Version 2.0"
@@ -40,7 +40,7 @@ def pomConfig = {
     scm {
         url "git@github.com:bancolombia/secrets-manager.git"
     }
-}
+}*/
 
 group 'com.github.bancolombia'
 version '1.0.0'
@@ -49,6 +49,41 @@ repositories {
 	mavenCentral()
 }
 
+
+install {
+    repositories.mavenInstaller {
+        pom {
+            project {
+                packaging 'aar'
+                groupId 'com.github.bancolombia' // PACKAGE NAME FROM BINTRAY ACCOUNT
+                artifactId 'secrets-manager' // THE NAME OF YOUR MODULE
+
+                name 'secrets-manager' // YOUR LIBRARY NAME
+                description 'Secrets manager'
+                // YOUR LIBRARY DESCRIPTION
+                url 'https://github.com/bancolombia/secrets-manager' // YOUR SITE
+
+                licenses {
+                    license {
+                        name "The Apache Software License, Version 2.0"
+                        url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                        distribution "repo"
+                    }
+                }
+                developers {
+                    developer {
+                        id "alejobtc"
+                        name "Alejandro Betancur Barrientos"
+                        email "abentac@bancolombia.com.co"
+                    }
+                }
+                scm {
+                    url "git@github.com:bancolombia/secrets-manager.git"
+                }
+            }
+        }
+    }
+}
 
 dependencies {
 	compile platform('software.amazon.awssdk:bom:2.13.10')
