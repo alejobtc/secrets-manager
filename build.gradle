@@ -48,6 +48,7 @@ def pomConfig = {
 }
 
 group 'com.github.bancolombia'
+version '1.0.0'
 
 repositories {
 	mavenCentral()
