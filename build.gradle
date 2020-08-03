@@ -21,7 +21,7 @@ plugins {
 test.onlyIf { false }
 
 
-/*def pomConfig = {
+def pomConfig = {
     licenses {
         license {
             name "The Apache Software License, Version 2.0"
@@ -40,7 +40,7 @@ test.onlyIf { false }
     scm {
         url "git@github.com:bancolombia/secrets-manager.git"
     }
-}*/
+}
 
 group 'com.github.bancolombia'
 version '1.0.0'
