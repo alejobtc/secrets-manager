@@ -136,7 +136,7 @@ bintray {
     configurations = ['archives']
     pkg {
         repo = 'Maven'
-        name = 'com.github.bancolombia.secrets-manager'
+        name = 'secrets-manager'
         licenses = ['MIT']
         vcsUrl = 'git@github.com:bancolombia/secrets-manager.git'
         version {
