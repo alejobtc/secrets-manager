@@ -21,8 +21,8 @@ plugins {
 
 test.onlyIf { false }
 
-group "$group"
-version  "$version"
+group = "$group"
+version =  "$version"
 
 repositories {
 	mavenCentral()
@@ -114,9 +114,9 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             from components.java
-            groupId = "$group"
-            artifactId = "$artifact"
-            version = "$version"
+            groupId = "$group" as Publication
+            artifactId = "$artifact" as Publication
+            version = "$version" as Publication
             pom.withXml {
                 def root = asNode()
                 root.appendNode('description', 'Secrets Manager')
