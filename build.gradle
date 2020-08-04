@@ -118,10 +118,10 @@ bintray {
         licenses = ['MIT']
         vcsUrl = 'git@github.com:bancolombia/secrets-manager.git'
         version {
-            name = '1.0.0'
+            name = "$version"
             desc = 'First version'
             released  = new Date()
-            vcsTag = '1.0.0'
+            vcsTag = "$version"
         }
     }
 }
