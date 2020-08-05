@@ -4,7 +4,7 @@ buildscript {
     }
     ext {
         versionnum = project.hasProperty('versionnum') ? project.property('versionnum') : '1.0.1'
-        groupid =  project.hasProperty('group') ? project.property('groupid') : 'com.github.bancolombia'
+        groupid =  project.hasProperty('groupid') ? project.property('groupid') : 'com.github.bancolombia'
         artifactid = group =  project.hasProperty('artifactid') ? project.property('artifactid') : 'secrets-manager'
     }
 
@@ -21,8 +21,8 @@ plugins {
 
 test.onlyIf { false }
 
-group = "$group"
-version =  "$version"
+group = "$groupid"
+version =  "$versionnum"
 
 repositories {
 	mavenCentral()
@@ -84,7 +84,7 @@ artifacts {
 
 jar {
     manifest.attributes provider: 'Ingeniería de Software'
-	archivesBaseName = "$artifact"
+	archivesBaseName = "$artifactid"
 }
 
 sonarqube {
